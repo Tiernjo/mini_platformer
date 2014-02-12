@@ -1,7 +1,9 @@
 extern mod native;
 extern mod rsfml;
+mod player;
 mod render;
 mod run;
+mod wall;
 mod window;
 
 //Macs need rsfml to start on main thread

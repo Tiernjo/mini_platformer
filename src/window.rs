@@ -1,7 +1,7 @@
 extern mod rsfml;
-use rsfml::graphics::{RenderWindow, Texture};
+use rsfml::graphics::{RenderWindow,Texture};
 use rsfml::graphics::rc::{Sprite};
-use rsfml::window::{Close,ContextSettings,event,VideoMode};
+use rsfml::window::{Close,ContextSettings,event,keyboard,VideoMode};
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -29,12 +29,18 @@ pub fn background() -> Sprite {
 }
 
 pub fn check(window:&mut RenderWindow) ->	~str {
-	let input = ~"";
+	let mut input = ~"";
 	loop {
 		match window.poll_event() {
-			event::Closed	=>	window.close(),
-			event::NoEvent	=>	break,
-			_				=>	{}
+			event::Closed		=>	window.close(),
+			event::KeyPressed{code, ..}	=>	match code {
+				keyboard::D 	=>	{return ~"right"}
+				keyboard::A		=>	{return ~"left"}
+				keyboard::Space	=>	{return ~"jump"}
+				_				=>	{}
+			},
+			event::NoEvent		=>	break,
+			_					=>	{}
 		}
 	}
 	input
