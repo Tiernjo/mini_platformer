@@ -4,6 +4,8 @@ use rsfml::graphics::rc::{Sprite};
 use rsfml::window::{Close,ContextSettings,event,keyboard,VideoMode};
 use std::cell::RefCell;
 use std::rc::Rc;
+use player::Avatar;
+mod player;
 
 pub fn new() -> RenderWindow{
 	let settings = ContextSettings::default();
@@ -28,9 +30,7 @@ pub fn background() -> Sprite {
 	back_sprite
 }
 
-pub fn check(window:&mut RenderWindow) ->	(bool,f32) {
-	let mut is_x = true; let mut move_by = 0.0;
-	let mut input = 0;
+pub fn check(window:&mut RenderWindow){
 	loop {
 		match window.poll_event() {
 			event::Closed		=>	window.close(),
@@ -38,10 +38,11 @@ pub fn check(window:&mut RenderWindow) ->	(bool,f32) {
 			_					=>	{}
 		}
 	}
-	if keyboard::is_key_pressed(keyboard::D) {is_x = true; move_by = 7.0}
-	if keyboard::is_key_pressed(keyboard::A) {is_x = true; move_by = -7.0}
-	if keyboard::is_key_pressed(keyboard::W) {is_x = false; move_by = -7.0}
-	if keyboard::is_key_pressed(keyboard::S) {is_x = false; move_by = 7.0}
-	
-	(is_x, move_by)
+}
+
+pub fn input(avatar:&mut Avatar)	{
+	if keyboard::is_key_pressed(keyboard::D) {avatar.force.x += 1.0}
+	if keyboard::is_key_pressed(keyboard::A) {avatar.force.x += -1.0}
+	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -2.0}
+	if keyboard::is_key_pressed(keyboard::S) {avatar.force.y += 0.0}
 }
