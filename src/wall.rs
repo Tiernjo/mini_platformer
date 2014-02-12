@@ -1,5 +1,5 @@
 extern mod rsfml;
-use rsfml::graphics::{RenderTexture,RenderWindow,Texture};
+use rsfml::graphics::{FloatRect,RenderTexture,RenderWindow,Texture};
 use rsfml::graphics::rc::{Sprite};
 use rsfml::system::{Vector2f};
 use rsfml::traits::Drawable;
@@ -10,6 +10,7 @@ pub struct GridBlock<'s>{
 	block_body:Sprite,
 	column:uint,
 	row:uint,
+	bounds:FloatRect,
 }
 // Methods for WallBlock
 impl<'s> GridBlock<'s> {
@@ -24,9 +25,12 @@ impl<'s> GridBlock<'s> {
 			Some(sprite)	=>	sprite,
 			None()			=>	fail!("Error, Wall sprite"),
 		};
-		GridBlock{block_body:sprite,column:0,row:0}
+		let wall_bounds = sprite.get_global_bounds();
+		GridBlock{block_body:sprite,column:0,row:0,bounds:wall_bounds}
 	}
-	
+	pub fn get_bounds(&self)	-> FloatRect {
+		self.block_body.get_global_bounds()
+	}
 	pub fn set_position(&mut self,column:uint,row:uint) {
 		let column_f32 = column as f32; let row_f32 = row as f32;
 		let real_position = Vector2f::new((column_f32 - 1.0) * 100.0, (row_f32 - 1.0)* 100.0);

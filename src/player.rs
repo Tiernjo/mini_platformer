@@ -1,5 +1,5 @@
 extern mod rsfml;
-use rsfml::graphics::{RenderTexture,RenderWindow,Texture};
+use rsfml::graphics::{FloatRect,RenderTexture,RenderWindow,Texture};
 use rsfml::graphics::rc::{Sprite};
 use rsfml::system::Vector2f;
 use rsfml::traits::Drawable;
@@ -9,6 +9,8 @@ use std::rc::Rc;
 pub struct Avatar<'p>{
 	body:Sprite,
 	position:Vector2f,
+	bounds:FloatRect,
+	force:Vector2f,
 }
 
 impl<'p> Avatar<'p> {
@@ -23,8 +25,33 @@ impl<'p> Avatar<'p> {
 			Some(player_sprite)	=>	player_sprite,
 			None()				=>	fail!("Error, Player sprite."),
 		};
-		Avatar{body:player_sprite,position:Vector2f::new(0.0,0.0)}
+		let avatar_bounds = player_sprite.get_global_bounds();
+		Avatar{
+			body:player_sprite,
+			position:Vector2f::new(0.0,0.0),
+			bounds:avatar_bounds,
+			force:Vector2f::new(0.0,10.0),
+		}
 	}
+	pub fn get_bounds(&self)	-> FloatRect {
+		self.body.get_global_bounds()
+	}
+	pub fn get_position(&self) -> Vector2f {
+		self.position
+	}
+	pub fn set_position(&mut self, new_position:Vector2f){
+		self.position = new_position;
+		self.body.set_position(&new_position)
+	}
+	pub fn walk(&mut self, shift:f32){
+		self.position.x += shift;
+		self.set_position(self.position);
+	}
+	pub fn jump(&mut self, shift:f32){
+		self.position.y += shift;
+		self.set_position(self.position);
+	}
+	
 }
 
 // Make WallBlock drawable

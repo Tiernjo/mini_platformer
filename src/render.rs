@@ -7,12 +7,12 @@ mod wall;
 mod player;
 
 
-pub fn game(window:&mut RenderWindow, background:&Sprite,grid:~[GridBlock],player:Avatar) {
+pub fn game(window:&mut RenderWindow, background:&Sprite,grid:~[GridBlock],player:&Avatar) {
 	window.clear(&Color::white());
 	window.draw(background);
 	for contents in grid.iter() {
 		window.draw(contents);
 	}
-	window.draw(&player);
+	window.draw(player);
 	window.display()
 }

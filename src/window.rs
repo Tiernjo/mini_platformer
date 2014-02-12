@@ -28,20 +28,20 @@ pub fn background() -> Sprite {
 	back_sprite
 }
 
-pub fn check(window:&mut RenderWindow) ->	~str {
-	let mut input = ~"";
+pub fn check(window:&mut RenderWindow) ->	(bool,f32) {
+	let mut is_x = true; let mut move_by = 0.0;
+	let mut input = 0;
 	loop {
 		match window.poll_event() {
 			event::Closed		=>	window.close(),
-			event::KeyPressed{code, ..}	=>	match code {
-				keyboard::D 	=>	{return ~"right"}
-				keyboard::A		=>	{return ~"left"}
-				keyboard::Space	=>	{return ~"jump"}
-				_				=>	{}
-			},
 			event::NoEvent		=>	break,
 			_					=>	{}
 		}
 	}
-	input
+	if keyboard::is_key_pressed(keyboard::D) {is_x = true; move_by = 7.0}
+	if keyboard::is_key_pressed(keyboard::A) {is_x = true; move_by = -7.0}
+	if keyboard::is_key_pressed(keyboard::W) {is_x = false; move_by = -7.0}
+	if keyboard::is_key_pressed(keyboard::S) {is_x = false; move_by = 7.0}
+	
+	(is_x, move_by)
 }
