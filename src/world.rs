@@ -1,17 +1,18 @@
+use enemy_spawner::MobSpawn;
 use player::Avatar;
 use wall::GridBlock;
 
 pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
 	let mut grid = ~[];
 	let mut i = 0;
-	while i < 13 {
+	while i < 32 {
 		grid.push(GridBlock::new(wall_sprite));
 		match i {
 			0..3	=>	{grid[i].set_position(i+6,3)}
 			4..13	=>	{grid[i].set_position(i-3,5)}
-			//14..17	=>	{grid[i].set_position(0, i - 13)}
-			//18..22	=>	{grid[i].set_position(10, i - 17)}
-			//23..31	=>	{grid[i].set_position(i -22,0)}
+			14..17	=>	{grid[i].set_position(0, i - 13)}
+			18..22	=>	{grid[i].set_position(10, i - 17)}
+			23..31	=>	{grid[i].set_position(i -22,0)}
 			_		=>	{}
 		}
 		grid[i].bounds = grid[i].get_bounds();
@@ -58,4 +59,16 @@ pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
 		i += 1;
 	}
 	grid
+}
+pub fn set_coin(coin_sprite:&str) -> GridBlock{
+	let mut only_coin = GridBlock::new(coin_sprite);
+	only_coin.set_position(3,2);
+	only_coin
+}
+pub fn set_enemy(enemy_spawn:&MobSpawn) -> Avatar {
+	let mut enemy = Avatar::new("../img/enemy.png");
+	let mut spawner_loc = enemy_spawn.get_position();
+	spawner_loc.y += 50.0;
+	enemy.set_position(spawner_loc);
+	enemy
 }

@@ -1,6 +1,7 @@
 extern mod rsfml;
 use rsfml::graphics::{RenderWindow,Texture};
 use rsfml::graphics::rc::{Sprite};
+use rsfml::system::Vector2f;
 use rsfml::window::{Close,ContextSettings,event,keyboard,VideoMode};
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -43,5 +44,5 @@ pub fn input(avatar:&mut Avatar)	{
 	if keyboard::is_key_pressed(keyboard::D) {avatar.force.x += 10.0}
 	if keyboard::is_key_pressed(keyboard::A) {avatar.force.x += -10.0}
 	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -20.0}
-	if keyboard::is_key_pressed(keyboard::S) {avatar.force.y += 10.0}
+	if keyboard::is_key_pressed(keyboard::Escape){avatar.set_position(Vector2f::new(50.0,300.0))}
 }

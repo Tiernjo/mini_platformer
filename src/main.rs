@@ -1,6 +1,7 @@
 extern mod native;
 extern mod rsfml;
 
+pub mod enemy_spawner;
 pub mod player;
 pub mod render;
 pub mod run;

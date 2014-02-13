@@ -63,3 +63,8 @@ impl<'p> Drawable for Avatar<'p>{
 		render_texture.draw_sprite_rc(&self.body);
 	}
 }
+impl<'p> Clone for Avatar<'p> {
+	fn clone(&self) -> Avatar{
+		self.clone()
+	}
+}

@@ -4,12 +4,14 @@ use rsfml::graphics::rc::{Sprite};
 use player::Avatar;
 use wall::GridBlock;
 
-pub fn game(window:&mut RenderWindow, background:&Sprite,grid:~[GridBlock],player:&Avatar) {
+pub fn game(window:&mut RenderWindow, background:&Sprite,grid:~[GridBlock],avatars:~[&mut Avatar]) {
 	window.clear(&Color::white());
 	window.draw(background);
 	for contents in grid.iter() {
 		window.draw(contents);
 	}
-	window.draw(player);
+	for contents in avatars.iter() {
+		window.draw(*contents);
+	}
 	window.display()
 }
