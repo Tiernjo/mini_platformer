@@ -51,6 +51,9 @@ impl<'p> Avatar<'p> {
 		self.position.y += shift;
 		self.set_position(self.position);
 	}
+	pub fn respawn(&mut self, spawn_point:Vector2f) {
+		self.set_position(spawn_point);
+	}
 	
 }
 

@@ -23,7 +23,6 @@ pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
 	let mut i = 0;
 	while i < 32 {
 		my_avatar.bounds = my_avatar.get_bounds();
-		println!("bounds are {:?}", my_avatar.bounds);
 		grid[i].bounds = grid[i].get_bounds();
 		// Set top solidity
 		if grid[i].bounds.top == my_avatar.bounds.top +50.0 {	// If avatar's bottom touches block's top
@@ -68,15 +67,29 @@ pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
 		i += 1;
 	}
 }
+pub fn check_coin(player:&Avatar,coin:&mut GridBlock) -> bool {
+	let mut is_taken = false;
+	coin.bounds = coin.get_bounds();
+	if player.bounds.top <= coin.bounds.top +100.0 && player.bounds.left <= coin.bounds.left +100.0
+	&& player.bounds.top +50.0 >= coin.bounds.top && player.bounds.left +50.0 >= coin.bounds.left{
+		is_taken = true;
+	}
+	is_taken
+}
 pub fn set_coin(coin_sprite:&str) -> GridBlock{
 	let mut only_coin = GridBlock::new(coin_sprite);
 	only_coin.set_position(3,2);
 	only_coin
 }
-pub fn set_enemy(enemy_spawn:&MobSpawn) -> Avatar {
-	let mut enemy = Avatar::new("../img/enemy.png");
-	let mut spawner_loc = enemy_spawn.get_position();
-	spawner_loc.y += 50.0;
-	enemy.set_position(spawner_loc);
-	enemy
+pub fn check_enemy(player:&Avatar,enemy:&Avatar) -> bool{
+	let mut is_touching = false;
+	if player.bounds.top <= enemy.bounds.top +100.0 && player.bounds.left <= enemy.bounds.left +100.0
+	&& player.bounds.top +50.0 >= enemy.bounds.top && player.bounds.left +50.0 >= enemy.bounds.left{
+		is_touching = true;
+	}
+	is_touching
+}
+pub fn set_enemy_spawn(enemy_spawn:&mut MobSpawn) {
+	let enemy_loc = enemy_spawn.get_position();
+	enemy_spawn.mob.respawn(enemy_loc);
 }

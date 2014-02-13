@@ -44,5 +44,5 @@ pub fn input(avatar:&mut Avatar)	{
 	if keyboard::is_key_pressed(keyboard::D) {avatar.force.x += 10.0}
 	if keyboard::is_key_pressed(keyboard::A) {avatar.force.x += -10.0}
 	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -20.0}
-	if keyboard::is_key_pressed(keyboard::Escape){avatar.set_position(Vector2f::new(50.0,300.0))}
+	if keyboard::is_key_pressed(keyboard::Escape){avatar.respawn(Vector2f::new(50.0,300.0))}
 }

@@ -9,7 +9,6 @@ pub mod wall;
 pub mod window;
 pub mod world;
 
-
 //Macs need rsfml to start on main thread
 #[start]
 fn start(argc: int, argv: **u8) -> int { 
