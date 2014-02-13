@@ -30,7 +30,7 @@ pub fn main_loop() {
 		
 		my_avatar.walk(my_avatar.force.x);
 		my_avatar.jump(my_avatar.force.y);
-		my_avatar.force = Vector2f::new(0.0, 1.0);
+		my_avatar.force = Vector2f::new(0.0, 10.0);
 		::render::game(&mut window, &background, grid, &my_avatar);
 	}
 }

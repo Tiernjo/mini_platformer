@@ -42,6 +42,6 @@ pub fn check(window:&mut RenderWindow){
 pub fn input(avatar:&mut Avatar)	{
 	if keyboard::is_key_pressed(keyboard::D) {avatar.force.x += 10.0}
 	if keyboard::is_key_pressed(keyboard::A) {avatar.force.x += -10.0}
-	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -2.0}
-	if keyboard::is_key_pressed(keyboard::S) {avatar.force.y += 9.0}
+	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -20.0}
+	if keyboard::is_key_pressed(keyboard::S) {avatar.force.y += 10.0}
 }

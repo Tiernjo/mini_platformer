@@ -4,7 +4,7 @@ use wall::GridBlock;
 pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
 	let mut grid = ~[];
 	let mut i = 0;
-	while i < 15 {
+	while i < 13 {
 		grid.push(GridBlock::new(wall_sprite));
 		match i {
 			0..3	=>	{grid[i].set_position(i+6,3)}
@@ -12,7 +12,6 @@ pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
 			//14..17	=>	{grid[i].set_position(0, i - 13)}
 			//18..22	=>	{grid[i].set_position(10, i - 17)}
 			//23..31	=>	{grid[i].set_position(i -22,0)}
-			14		=>	{grid[i].set_position(i-12,i-12)}
 			_		=>	{}
 		}
 		grid[i].bounds = grid[i].get_bounds();
