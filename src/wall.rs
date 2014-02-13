@@ -46,3 +46,9 @@ impl<'s> Drawable for GridBlock<'s>{
 		render_texture.draw_sprite_rc(&self.block_body);
 	}
 }
+
+impl<'s> Clone for GridBlock<'s>{
+	fn clone(&self) -> GridBlock {
+		self.clone()
+	}
+}

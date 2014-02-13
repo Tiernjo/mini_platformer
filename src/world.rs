@@ -2,7 +2,7 @@ use enemy_spawner::MobSpawn;
 use player::Avatar;
 use wall::GridBlock;
 
-pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
+pub fn set_wall(wall_sprite:&str) -> ~[GridBlock]{
 	let mut grid = ~[];
 	let mut i = 0;
 	while i < 32 {
@@ -15,6 +15,15 @@ pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
 			23..31	=>	{grid[i].set_position(i -22,0)}
 			_		=>	{}
 		}
+		i += 1;
+	}
+	grid
+}
+pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
+	let mut i = 0;
+	while i < 32 {
+		my_avatar.bounds = my_avatar.get_bounds();
+		println!("bounds are {:?}", my_avatar.bounds);
 		grid[i].bounds = grid[i].get_bounds();
 		// Set top solidity
 		if grid[i].bounds.top == my_avatar.bounds.top +50.0 {	// If avatar's bottom touches block's top
@@ -58,7 +67,6 @@ pub fn set_wall(wall_sprite:&str, my_avatar:&mut Avatar) -> ~[GridBlock]{
 		}	
 		i += 1;
 	}
-	grid
 }
 pub fn set_coin(coin_sprite:&str) -> GridBlock{
 	let mut only_coin = GridBlock::new(coin_sprite);
