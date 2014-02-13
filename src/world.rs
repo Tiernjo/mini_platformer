@@ -81,6 +81,20 @@ pub fn set_coin(coin_sprite:&str) -> GridBlock{
 	only_coin.set_position(3,2);
 	only_coin
 }
+pub fn check_goal(player:&Avatar,goal:&mut GridBlock) -> bool {
+	let mut is_won = false;
+	goal.bounds = goal.get_bounds();
+	if player.bounds.top <= goal.bounds.top +200.0 && player.bounds.left <= goal.bounds.left +200.0
+	&& player.bounds.top +50.0 >= goal.bounds.top && player.bounds.left +50.0 >= goal.bounds.left{
+		is_won = true;
+	}
+	is_won
+}
+pub fn set_goal(goal_sprite:&str)	-> GridBlock{
+	let mut goal = GridBlock::new(goal_sprite);
+	goal.set_position(9,1);
+	goal
+}
 pub fn check_enemy(player:&Avatar,enemy:&Avatar) -> bool{
 	let mut is_touching = false;
 	if player.bounds.top <= enemy.bounds.top +100.0 && player.bounds.left <= enemy.bounds.left +100.0

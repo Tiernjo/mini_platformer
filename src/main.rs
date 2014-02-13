@@ -5,6 +5,7 @@ pub mod enemy_spawner;
 pub mod player;
 pub mod render;
 pub mod run;
+pub mod ui;
 pub mod wall;
 pub mod window;
 pub mod world;

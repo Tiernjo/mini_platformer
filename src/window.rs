@@ -46,3 +46,17 @@ pub fn input(avatar:&mut Avatar)	{
 	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -20.0}
 	if keyboard::is_key_pressed(keyboard::Escape){avatar.respawn(Vector2f::new(50.0,300.0))}
 }
+
+pub fn menu(screen:uint) -> uint{
+	let mut to_screen = screen;
+	if keyboard::is_key_pressed(keyboard::Space) {
+		match screen {
+			0	=>	{to_screen = 1}
+			1   =>	{}
+			2   =>	{to_screen = 0}
+			3   =>	{to_screen = 0}
+			_	=>	{}
+		}
+	}
+	to_screen
+}		
