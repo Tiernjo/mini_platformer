@@ -3,9 +3,6 @@ use rsfml::graphics::{Color,RenderWindow};
 use rsfml::graphics::rc::{Sprite};
 use player::Avatar;
 use wall::GridBlock;
-mod wall;
-mod player;
-
 
 pub fn game(window:&mut RenderWindow, background:&Sprite,grid:~[GridBlock],player:&Avatar) {
 	window.clear(&Color::white());

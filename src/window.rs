@@ -5,7 +5,6 @@ use rsfml::window::{Close,ContextSettings,event,keyboard,VideoMode};
 use std::cell::RefCell;
 use std::rc::Rc;
 use player::Avatar;
-mod player;
 
 pub fn new() -> RenderWindow{
 	let settings = ContextSettings::default();
@@ -41,8 +40,8 @@ pub fn check(window:&mut RenderWindow){
 }
 
 pub fn input(avatar:&mut Avatar)	{
-	if keyboard::is_key_pressed(keyboard::D) {avatar.force.x += 1.0}
-	if keyboard::is_key_pressed(keyboard::A) {avatar.force.x += -1.0}
+	if keyboard::is_key_pressed(keyboard::D) {avatar.force.x += 10.0}
+	if keyboard::is_key_pressed(keyboard::A) {avatar.force.x += -10.0}
 	if keyboard::is_key_pressed(keyboard::W) {avatar.force.y += -2.0}
-	if keyboard::is_key_pressed(keyboard::S) {avatar.force.y += 0.0}
+	if keyboard::is_key_pressed(keyboard::S) {avatar.force.y += 9.0}
 }
