@@ -17,11 +17,12 @@ pub fn main_loop() {
 	let goal_sprite = "../img/goal.png";
 	let mut screen:uint = 0; let mut lives:f32 = 3.0;
 	let mut coins_got:f32 = 0.0;
+	let mut main_clock = Clock::new(); 
 
 	// Pre loaded 
 	// Avatar Init
 	let mut my_avatar = Avatar::new(avatar_sprite);
-	let avatar_origin = Vector2f::new(0.0,300.0);
+	let avatar_origin = Vector2f::new(0.0,350.0);
 	// Enemy system Init
 	let mut enemy_spawn = MobSpawn::new();
 	enemy_spawn.set_position(8,4);
@@ -30,7 +31,7 @@ pub fn main_loop() {
 	let mut walls = ::world::set_wall(wall_sprite);	// set all walls
 	walls.push(::world::set_coin(coin_sprite));	// Add coin to walls
 	walls.push(::world::set_goal(goal_sprite));
-
+	// Overlay Init
 	let mut overlay = ~[];
 	overlay.push(Menu::new("Coins: 0"));
 	overlay.push(Menu::new("Lives: 3"));
@@ -61,6 +62,7 @@ pub fn main_loop() {
 			}
 			// Game Screen
 			1   =>	{
+				let deltaTime = main_clock.restart().as_seconds();
 				// Controls
 				::window::input(&mut my_avatar);
 				// Collision
@@ -70,7 +72,7 @@ pub fn main_loop() {
 				let is_dead = ::world::check_enemy(&mut my_avatar,&mut enemy_spawn.mob);	// Whether player and enemy touch
 				let is_won = ::world::check_goal(&mut my_avatar,&mut walls[33]);
 				// Respawn only mob
-				if enemy_time.get_elapsed_time() > Time::with_seconds(5.5){
+				if enemy_time.get_elapsed_time() > Time::with_seconds(3.5){
 					::world::set_enemy_spawn(&mut enemy_spawn);
 					enemy_time.restart();
 				}
@@ -92,12 +94,11 @@ pub fn main_loop() {
 				}
 				let live_string = lives.to_str();
 				overlay[1].set_text("Lives: " + live_string);
-
 				// Move/Jump player and monster by their recieved forces
-				my_avatar.walk(my_avatar.force.x);my_avatar.jump(my_avatar.force.y);
-				my_avatar.force = Vector2f::new(0.0, 10.0);
-				enemy_spawn.mob.walk(enemy_spawn.mob.force.x); enemy_spawn.mob.jump(enemy_spawn.mob.force.y);
-				enemy_spawn.mob.force = Vector2f::new(-2.0,10.0);
+				my_avatar.walk(my_avatar.force.x*deltaTime);my_avatar.jump(my_avatar.force.y*deltaTime);
+				my_avatar.force = Vector2f::new(0.0, 100.0);
+				enemy_spawn.mob.walk(enemy_spawn.mob.force.x*deltaTime); enemy_spawn.mob.jump(enemy_spawn.mob.force.y*deltaTime);
+				enemy_spawn.mob.force = Vector2f::new(-200.0,100.0);
 				::render::game(&mut window, &background, &mut walls, &my_avatar,&enemy_spawn.mob,&overlay);
 			}
 			// Game Over Screen

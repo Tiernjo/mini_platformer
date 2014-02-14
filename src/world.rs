@@ -25,7 +25,7 @@ pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
 		my_avatar.bounds = my_avatar.get_bounds();
 		grid[i].bounds = grid[i].get_bounds();
 		// Set top solidity
-		if grid[i].bounds.top == my_avatar.bounds.top +50.0 {	// If avatar's bottom touches block's top
+		if grid[i].bounds.top >= my_avatar.bounds.top +45.0 && grid[i].bounds.top <= my_avatar.bounds.top + 55.0{	// If avatar's bottom touches block's top
 			if grid[i].bounds.left < my_avatar.bounds.left  + 50.0{	// and if box is to the right of avatar
 				if grid[i].bounds.left + 100.0 > my_avatar.bounds.left {
 					if my_avatar.force.y > 0.0 {
@@ -35,7 +35,7 @@ pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
 			}
 		}
 		// Set bottom solidity
-		if grid[i].bounds.top +100.0 == my_avatar.bounds.top {	// If avatar's top touches block's bottom
+		if grid[i].bounds.top +95.0 <= my_avatar.bounds.top && grid[i].bounds.top + 105.0 >= my_avatar.bounds.top{	// If avatar's top touches block's bottom
 			if grid[i].bounds.left < my_avatar.bounds.left + 50.0{	// and if box is to the right of avatar
 				if grid[i].bounds.left + 100.0 > my_avatar.bounds.left {
 					if my_avatar.force.y < 0.0 {
@@ -45,7 +45,7 @@ pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
 			}
 		}
 		// Set left solidity
-		if grid[i].bounds.left == my_avatar.bounds.left + 50.0 {	// if if avatar's right touches blocks left
+		if grid[i].bounds.left >= my_avatar.bounds.left + 45.0 && grid[i].bounds.left <= my_avatar.bounds.left + 55.0 {	// if if avatar's right touches blocks left
 			if grid[i].bounds.top < my_avatar.bounds.top +50.0{		//
 				if grid[i].bounds.top +100.0 > my_avatar.bounds.top {	// and if avatar is within vicinity of box side
 					if my_avatar.force.x > 0.0 {
@@ -55,7 +55,7 @@ pub fn check_walls(grid:&mut ~[GridBlock],my_avatar:&mut Avatar) {
 			}
 		}
 		// Set right solidity
-		if grid[i].bounds.left + 100.0 == my_avatar.bounds.left {	// if avatar's left touches block right
+		if grid[i].bounds.left + 95.0 <= my_avatar.bounds.left && grid[i].bounds.left + 105.0 >= my_avatar.bounds.left{	// if avatar's left touches block right
 			if grid[i].bounds.top < my_avatar.bounds.top + 50.0 {	//
 				if grid[i].bounds.top + 100.0 > my_avatar.bounds.top {
 					if my_avatar.force.x < 0.0 {

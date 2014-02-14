@@ -30,7 +30,7 @@ impl<'p> Avatar<'p> {
 			body:player_sprite,
 			position:Vector2f::new(0.0,0.0),
 			bounds:avatar_bounds,
-			force:Vector2f::new(0.0,10.0),
+			force:Vector2f::new(0.0,100.0),
 		}
 	}
 	pub fn get_bounds(&self)	-> FloatRect {
